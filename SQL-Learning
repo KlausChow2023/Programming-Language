@@ -1,0 +1,116 @@
+数据库 可以分为3个层级：库，表，数据
+    借助数据库管理系统
+    SQL 语言是对数据库，数据进行操作管理查询的工具
+        访问和处理数据库的标准计算机语言
+
+特征：
+    大小写不敏感
+    可以多行书写，最后以 ; 结束。但是中间不能有空行
+    注释方法：
+        单行注释 
+            -- 注释内容(-- 后面一定要有空格)
+            #注释内容
+        多行注释
+            /* 注释
+                内容 */
+        
+MySQL 报错：Public Key Retrieval is not allowed
+    原因：
+        由于 MySQL 8.0 及以上版本默认启用了新的身份验证插件（caching_sha2_password）。
+        某些 MySQL 客户端在连接时可能无法自动处理这种身份验证方式，从而导致连接失败。
+
+    解决方法：
+        如果有 MySQL 服务器的管理员权限，可以将用户的身份验证插件更改为 mysql_native_password。
+            1. 打开cmd,登录到 MySQL 服务器：
+                mysql -u 用户名 -p
+            2. 切换到 有问题的 数据库：
+                use 数据库名;
+            3. 更改用户的身份验证插件：
+                alter user 'username'@'hostname(用户和主机名的组合)' identified with mysql_native_password by 'password(你的密码)';
+            4. 刷新权限：
+                flush privileges;
+
+SQL 语言基于功能，分为：
+    数据定义：DDL (Data Definition Language)
+        库，表的创建删除等
+    数据操纵：DML (Data Manipulation Language)
+        新增数据，删除数据，修改数据等
+    数据控制：DCL (Data Control Language)
+        新增用户，删除用户，密码修改，权限管理等
+    数据查询：DQL (Data Query Language)
+        基于需求查询和计算数据
+
+MySQL中数据库名字的命名规则如下：
+    可以使用字母（a-z, A-Z）、数字（0-9）和下划线（_）。
+    首字符必须以字母开头，不能以数字或特殊字符开头。
+    最长可以达到64个字符。
+    不能包含空格或特殊字符（如 @, #, $, %, 等）。
+    默认情况下是区分大小写的。
+    避免使用MySQL的保留关键字作为标识符（如 SELECT, INSERT, UPDATE, DELETE 等）。
+
+DDL 
+    库操作：
+        show databases;  # 查看数据库
+        use 数据库名称;  # 使用数据库
+        select database();  # 查看当前使用的数据库
+        create database 数据库名称 [charset UTF8];  # 创建数据库
+            [ ] 内部的是可选的，非强制
+        drop database 数据库名称; # 删除数据库
+
+    表操作：
+        show tables;  # 查看表
+            要先选择数据库
+        create table 表名称(列名称 列类型, 列名称 列类型, 列名称 列类型...);
+            常用列类型有：
+                整数类型：
+                    int：普通大小的整数。
+                    bigint：大整数类型。
+                    tinyint：小整数类型。
+                    smallint：较小范围的整数类型。
+
+                浮点数类型：
+                    float：单精度浮点数。
+                    double：双精度浮点数。
+                    decimal：精确小数类型。
+                
+                字符串类型：
+                    varchar(size)：可变长度字符串。
+                    char(size)：固定长度字符串。
+                    text：用于存储较大文本数据的类型。
+                    enum：枚举类型，可以存储指定的可能值之一。
+
+                日期与时间类型：
+                    date：存储日期值。
+                    time：存储时间值。
+                    datetime：存储日期和时间值。
+                    timestamp：存储时间戳。
+                二进制类型：
+                    blob：用于存储二进制数据，如图像、音频、视频等。
+                    varbinary(size)：可变长度二进制字符串。
+                    bit(size)：存储位字段值的二进制数据类型。
+
+                其他常用类型：
+                    bool 或 boolean：布尔类型。
+                    set：集合类型。
+                    json：存储 JSON 数据类型。
+
+        drop table 表名称; # 删除表
+            drop table if exist 表名称;
+
+DML
+    插入 insert
+        insert into 表名 (列1, 列2, ..., 列n) values (值1, 值2, ..., 值n);
+            当对表的全部列进行插入时，(列1, 列2, ..., 列n) 可以省略。数据会顺次插入
+            字符串要用单引号引起
+    删除 delete
+        delete from 表名 [where 条件判断];
+            可以不用条件判断
+            支持操作符， = > < >= <= !=
+            会直接删除一行
+
+    更新 update
+        update 表名 set 列 = 值 [where 条件判断];
+
+DQL
+    数据查询
+        select 字段列表
