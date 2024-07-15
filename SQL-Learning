@@ -113,4 +113,27 @@ DML
 
 DQL
     数据查询
-        select 字段列表
+        select 列名,列名2 from 表名;
+        select * from 表名;
+            显示表的全部列
+        select * from 表名 where 条件;
+            显示表内符合条件的全部列
+
+    分组聚合
+        将数据按某些列分组，然后对每组数据应用聚合函数进行计算。这样可以得到每组数据的汇总信息。
+        select 字段|聚合函数 from 表名 where 条件 group by 列名;
+            条件限制：group by 后面出现谁，字段里才可以写谁
+            聚合函数有：
+                sum(列名)    求和
+                avg(列名)    求平均值
+                min(列名)    求最小值
+                max(列名)    求最大值
+                count(列名| *)    求数量
+
+    排序分页
+        select 字段|聚合函数|*  from 表名 where 条件 group by 列名 order by 列名 [ASC | DESC];
+            ASC(升序) | DESC(降序)
+            
+
+        
+    
