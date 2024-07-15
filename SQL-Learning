@@ -131,9 +131,8 @@ DQL
                 count(列名| *)    求数量
 
     排序分页
-        select 字段|聚合函数|*  from 表名 where 条件 group by 列名 order by 列名 [ASC | DESC];
+        select 字段|聚合函数|*  from 表名 where 条件 group by 列名 order by 列名 [ASC | DESC] limit n ,m;
+            执行顺序：from -> where -> group by -> select -> order by -> limit
             ASC(升序) | DESC(降序)
-            
-
-        
-    
+            limit n    表示返回查询结果的前 n 行
+            limit n, m    表名查询会从表的第n行开始，返回接下来的m条记录。    
