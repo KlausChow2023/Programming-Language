@@ -1,0 +1,28 @@
+	* At begining, we dont know the value of d7 register
+move.l  #$99999999,d7	* We set some value to d7 register
+	* Then zero flag = 0
+move.l  #$00000000,d7	* Then set the value of d7 to "0000 0000"
+	*Then zero flag = 1
+	* Because " zero flag = 1 " means the value of register == 0 is True
+
+Example,
+   ORG    $0000    * all project store in this address
+START:                  ; first instruction of program
+* Put program code here
+    
+    move.w  $2000,d0
+    move.w  $2002,d1
+    cmp.w   d0,d1   * if equal,return 1; else,return 0.[can campare anything]
+	* all branch operate based on the flags
+    beq equal	* if zero flag = 1 ,that means equal, then run "equal" parts like below.
+    bne n_equal	   * if zero flag = 0 ,that means not equal, then run "n_equal" parts like below.
+ 
+equal
+    move.w  #1,$2004
+    bra halt	* after excution, we have to go out.
+
+n_equal
+    move.w  #0,$2004
+    bra halt
+halt
+    * this is empty, just for going out.

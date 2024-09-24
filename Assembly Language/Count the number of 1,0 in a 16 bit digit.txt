@@ -1,0 +1,40 @@
+*-----------------------------------------------------------
+* Title      :
+* Written by :
+* Date       :
+* Description:count the number of "1","0" in a 16 bit digit
+*-----------------------------------------------------------
+    ORG    $0000    * all project store in this address
+START:                  ; first instruction of program
+* At begining, we dont know the value of d7 register
+    move.l  #$00000000,$2004	* We set "0" value to 2004H
+    move.w  $2000,d0  
+    move.b  #17,d1  * because we have a 16 bits digit, we have to run the lift shift 16 times 
+    
+main
+
+    sub.b   #1,d1
+    beq halt
+ 
+    
+    lsl.w   #1,d0
+    bcs carry_set
+    bcc carry_clr
+    
+
+carry_set
+    add.b   #1,$2004
+    bra main
+    
+carry_clr
+    add.b   #1,$2006
+    bra main
+
+halt
+*   
+    SIMHALT             ; halt simulator
+
+* Put variables and constants here
+
+    END    START        ; last line of source
+
