@@ -65,6 +65,12 @@
 		这种注释方法可以注释多行
 	*/
 
+// 0 是数字0
+    // \0 是字符，ASCII值是0
+    // 数字 0 和 \0 没什么区别，因为ASCII值相同，都是0
+    // '0'是字符 0,ASCII值是48
+    // EOF 是 end of file，是文件的结束标志，值是-1
+
 //第一个程序：
 #include<stdio.h>	//stdio 代表 standard_input_output
 //int main()	//c语言代码中有且只有一个main函数，主函数。规定他是函数的入口。
