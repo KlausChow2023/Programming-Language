@@ -951,7 +951,7 @@ def 方法名(self, 形参1, 形参2, 形参3, ... , 形参 N) :
 # stu_info.name = 'Klaus'
 # stu_info.age = 24
 # stu_info.height = 185   # 为对象赋值
-#
+
 # print(stu_info.height)
 # print(stu_info.age)
 # print(stu_info.weight)
